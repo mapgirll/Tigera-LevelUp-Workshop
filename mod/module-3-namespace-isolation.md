@@ -1,4 +1,4 @@
-Labeling
+Microsegmentation
 ==============
 
 ## Step 1 - Label all pods
@@ -92,7 +92,7 @@ Now go to Calico Cloud and check the created tiers under `policies` page
 After creating tiers, apply some general global policies to them before creating application specific policies. These policies include allowing traffic to kube-dns from all pods, passing traffic that doesn't explicitly match in the tier and finally a default deny policy.
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/JosephYostos/Compliance-workshop/main/03-security-policies/mainfest/2.2-pass-dns-default-deny-policy.yaml
+kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/hipstershop/pass-dns-default-deny-policy.yaml
 ```
 
 Now go to Calico Cloud and check the created policies under each tier
@@ -107,7 +107,7 @@ In this example, we will apply two global policies:
 - pci-allowlist:  allow ingress traffic to the frontend over port 8080
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/JosephYostos/Compliance-workshop/main/03-security-policies/mainfest/2.3-pci-isolation-policy.yaml
+kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/hipstershop/pci-isolation-policy.yaml
 ```
 Now go to Calico Cloud and make sure the two policies are created under the security tier.
 
@@ -125,7 +125,7 @@ Run two tests:
 Before we start we need to allow egress traffic from the pods in the default namespace:
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/JosephYostos/Compliance-workshop/main/03-security-policies/mainfest/2.4-default-egress-policy.yaml
+kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/hipstershop/default-egress-policy.yaml
 ```
 
 Now, let's run the test
@@ -172,12 +172,7 @@ Now, you can successfully connect from the MultiTool pod in the default namespac
 
 ## Step 6 - Identity-aware Microsegmentation with Hipstershop
 
-To perform the microsegmentation we will need to know more about how the application communicates between the services. The following diagram provides all the information we need to know:
-
-![Image Description](../assets/hipstershop-diagram.png)
-
-After reviewing the diagram come up with a table of rules that looks like this:
-
+To perform the microsegmentation we will need to know more about how the application communicates between the services. 
 
 Source Service | Destination Service | Destination Port
 --- | --- | ---
@@ -202,17 +197,16 @@ recommendationservice | productcatalogservice | 3550
 This results in the following policy which we can now apply to the app-hipstershop tier using:
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/JosephYostos/Compliance-workshop/main/03-security-policies/mainfest/2.6-hipstershop-policy.yaml
+kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/hipstershop/hipstershop-policy.yaml
 ```
 Make a modification to PCI Restriction to enable microsegmentation. Right now the PCI policy allows communication between all the 'pci=true' pods. You want to pass this decision to the 'app-hipstershop' tier so apply the following update:
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/JosephYostos/Compliance-workshop/main/03-security-policies/mainfest/2.7-pci-policy-update.yaml
+kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/hipstershop/pci-policy-update.yaml
 ```
 
-Once this is applied, the policy inside of the 'app-hipstershop' tier should apply and give microsegmentation inside your application namespace. The Policy Board should show traffic being allowed by most of our policies:
+Once this is applied, the policy inside of the 'app-hipstershop' tier should apply and give microsegmentation inside your application namespace. The Policy Board should show traffic being allowed by most of our policies.
 
-![Image Description](../assets/policy-microsegmentation.png)
 
 Let's do a quick test. According to the above table redis-cart should accept communication only from cartservice over port 6379
 
@@ -302,6 +296,12 @@ kubectl -n hipstershop exec -t multitool -- sh -c 'ping -c 3 google.com'
 kubectl -n hipstershop exec -t multitool -- sh -c 'ping -c 3 github.com'
 ```
 
+```bash
+kubectl -n hipstershop exec -t multitool -- sh -c 'curl -I --connect-timeout 3 tigera.io 2>/dev/null | grep -i http'
+kubectl -n hipstershop exec -t multitool -- sh -c 'curl -I --connect-timeout 3 google.com 2>/dev/null | grep -i http'
+kubectl -n hipstershop exec -t multitool -- sh -c 'curl -I --connect-timeout 3 github.com 2>/dev/null | grep -i http'
+```
+
 
 ```bash
 bash-5.1# ping -c 3 google.com
@@ -331,7 +331,7 @@ PING github.com (140.82.112.3) 56(84) bytes of data.
 
 As expected our pings to google.com and tigera.io are successful but our ping to github.com is denied.
 
-> :note: If ping doesn't work for you Azure may be blocking ICMP by default in your environment. You can verify if Calico is honouring the policies using Flow Logs.
+> :note: If ping doesn't work for you Azure may be blocking ICMP by default in your environment. You can verify if Calico is honouring the policies using Flow Logs or use curl.
 
 Review the created DNS policy and NetworkSet in Calico Cloud
 

@@ -1,0 +1,100 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.quarantine
+spec:
+  tier: security
+  order: 140
+  selector: quarantine == "true"
+  ingress:
+  - action: Log
+    source: {}
+    destination: {}
+  - action: Deny
+    source: {}
+    destination: {}
+  egress:
+  - action: Log
+    source: {}
+    destination: {}
+  - action: Deny
+    source: {}
+    destination: {}
+  types:
+  - Ingress
+  - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.vote-allowlist
+spec:
+  tier: security
+  order: 0
+  selector: all()
+  namespaceSelector: ""
+  serviceAccountSelector: ""
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "frontend"
+        ports:
+          - "8080"
+  egress:
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        ports:
+          - "53"
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        ports:
+          - "53"
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.vote-restrict
+spec:
+  tier: security
+  order: 75
+  selector: vote == "true"
+  namespaceSelector: ""
+  serviceAccountSelector: ""
+  ingress:
+    - action: Allow
+      source:
+        selector: vote == "true"
+      destination: {}
+    - action: Deny
+      source:
+        selector: vote != "true"
+      destination: {}
+  egress:
+    - action: Allow
+      source: {}
+      destination:
+        selector: vote == "true"
+    - action: Deny
+      source: {}
+      destination:
+        selector: vote != "true"
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress

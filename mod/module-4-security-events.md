@@ -6,16 +6,28 @@ Container Security and Security Events
 In this module we're moving away from the Hipstershop Online Boutique and setting up a sample voting application:
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/tigera-solutions/cc-aks-visualize-identify-security-gaps/main/pre/001-felixConfigutations.yaml
-kubectl apply -f https://raw.githubusercontent.com/tigera-solutions/cc-aks-visualize-identify-security-gaps/main/pre/002-tiers.yaml
-kubectl apply -f https://raw.githubusercontent.com/tigera-solutions/cc-aks-visualize-identify-security-gaps/main/pre/003-networkPolicies.yaml
-kubectl apply -f https://raw.githubusercontent.com/tigera-solutions/cc-aks-visualize-identify-security-gaps/main/pre/005-vote-app-manifest.yaml
-kubectl apply -f https://raw.githubusercontent.com/tigera-solutions/cc-aks-visualize-identify-security-gaps/main/pre/006-globalReports.yaml
-kubectl apply -f https://raw.githubusercontent.com/tigera-solutions/cc-aks-visualize-identify-security-gaps/main/pre/008-applicationLayer.yaml
-kubectl apply -f https://raw.githubusercontent.com/tigera-solutions/cc-aks-visualize-identify-security-gaps/main/pre/009-pods.yaml
+kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/vote/001felixConfigutations.yaml
+kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/vote/002tiers.yaml
+kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/vote/003-networkPolicies.yaml
+kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/vote/004-vote-app-manifest.yaml
+kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/vote/005-applicationLayer.yaml
+kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/vote/006-pods.yaml
 ```
 
-# Module 3 - Malware protection, access control and quarantine with Threat Defence
+or
+
+```bash
+kubectl apply -f vote
+```
+
+Just like the previous modules, you need to label all pods within the ```vote``` namespace so they will be able to communicate with each other. 
+
+```bash
+kubectl label pods --all -n vote vote=true
+```
+
+Threat Defense
+==============
 
 Calico Cloud provides a threat detection engine that analyzes observed file and process activity to detect known malicious and suspicious activity.
 

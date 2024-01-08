@@ -1,0 +1,56 @@
+apiVersion: projectcalico.org/v3
+kind: Tier
+metadata:
+  name: app-vote
+spec:
+  order: 500
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: app-hipstershop.hipstershop-default-pass
+spec:
+  tier: app-hipstershop
+  order: 5000
+  selector: ""
+  namespaceSelector: ""
+  serviceAccountSelector: ""
+  ingress:
+    - action: Pass
+      source: {}
+      destination: {}
+  egress:
+    - action: Pass
+      source: {}
+      destination: {}
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: app-vote.vote-default-pass
+spec:
+  tier: app-vote
+  order: 5000
+  selector: ""
+  namespaceSelector: ""
+  serviceAccountSelector: ""
+  ingress:
+    - action: Pass
+      source: {}
+      destination: {}
+  egress:
+    - action: Pass
+      source: {}
+      destination: {}
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress
