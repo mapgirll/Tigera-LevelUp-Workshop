@@ -48,7 +48,7 @@ az login
 Make sure that you completed the prerequisites above and cloned the Terraform [blueprint](https://github.com/tigera-solutions/azure-hub-spoke-aks-egress-gateways/tree/main) by running the following command in a local directory:
 
 ``` bash
-git clone git@github.com:tigera-solutions/azure-hub-spoke-aks-egress-gateways.git
+git clone https://github.com/tigera-solutions/azure-hub-spoke-aks-egress-gateways.git
 ```
 
 Navigate to the [azure](https://github.com/tigera-solutions/azure-hub-spoke-aks-egress-gateways/tree/main/azure) subdirectory and then deploy the infrastructure.
