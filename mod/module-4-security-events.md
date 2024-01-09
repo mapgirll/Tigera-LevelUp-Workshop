@@ -6,8 +6,8 @@ Container Security and Security Events
 In this module we're moving away from the Hipstershop Online Boutique and setting up a sample voting application:
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/vote/001felixConfigutations.yaml
-kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/vote/002tiers.yaml
+kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/vote/001-felixConfigurations.yaml
+kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/vote/002-tiers.yaml
 kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/vote/003-networkPolicies.yaml
 kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/vote/004-vote-app-manifest.yaml
 kubectl apply -f https://raw.githubusercontent.com/mapgirll/Tigera-LevelUp-Workshop/main/vote/005-applicationLayer.yaml
@@ -155,7 +155,7 @@ We have the `quarantine` policy created in the `security` tier. This policy has 
 
 ---
 
-[:arrow_right: Workload Microsegmentation](/mod/module-3-namespace-isolation.md)       <br>
+[:arrow_left: Workload Microsegmentation](/mod/module-3-namespace-isolation.md)       <br>
 
-[:arrow_left: Web Application Firewall](/mod/module-5-waf.md)  <br>
+[:arrow_right: Web Application Firewall](/mod/module-5-waf.md)  <br>
 [:leftwards_arrow_with_hook: Back to Main](/README.md)  

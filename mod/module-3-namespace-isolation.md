@@ -286,7 +286,7 @@ spec:
 EOF
 ```
 
-Now any pod that doesn't have a more permissive egress policy will only be allowed to access 'google.com' and 'tigera.io' and you can test this with our 'multitool' pod in the 'hisptershop' namespace.
+Now any pod that doesn't have a more permissive egress policy will only be allowed to access 'google.com' and 'tigera.io' and you can test this with our 'multitool' pod in the 'hipstershop' namespace.
 
 Let's go into our multitool pod in the 'hipstershop' namespace and try to connect to a few domains (google.ca, tigera.io, github.com):
 

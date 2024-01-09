@@ -122,7 +122,7 @@ You should get a response like this:
 
 ---
 
-[:arrow_right: Container Security and Calico Security Events](/mod/module-4-security-events.md)         <br>
+[:arrow_left: Container Security and Calico Security Events](/mod/module-4-security-events.md)         <br>
 
-[:arrow_left: Egress Gateway and Azure Firewall](/mod/module-6-egress-gateway-azure-firewall.md)   <br>
+[:arrow_right: Egress Gateway and Azure Firewall](/mod/module-6-egress-gateway-azure-firewall.md)   <br>
 [:leftwards_arrow_with_hook: Back to Main](/README.md)  

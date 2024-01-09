@@ -314,6 +314,8 @@ kubectl annotate ns default \
   egress.projectcalico.org/namespaceSelector="projectcalico.org/name == 'tenant0-egw'"
 ```
 
+Egress traffic from Kubernetes can be directed through specific Egress Gateways, using Egress Gateway Policy or by annotating a namespace or pod.
+
 Traffic is now allowed through the Azure Firewall because the incoming requests originate from a specific, recognized CIDR range assigned to the tenant0 Calico Egress Gateways.
 
 ``` bash

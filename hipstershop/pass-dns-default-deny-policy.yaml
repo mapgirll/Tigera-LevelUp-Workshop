@@ -96,7 +96,7 @@ spec:
     - Egress
 ---
 apiVersion: projectcalico.org/v3
-kind: GlobalNetworkPolicy
+kind: StagedGlobalNetworkPolicy
 metadata:
   name: default.default-deny
 spec:
