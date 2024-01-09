@@ -76,3 +76,10 @@ To view resources in the "hipstershop" namespace click on the `Service Graph` ic
 Click on `Default` view for a top level view of the cluster resources:
 
 Double click on the `Hipstershop` Namespace as highlighted to bring only resources in the "hipstershop" namespace in view along with other resources communicating into or out of the "hipstershop" Namespace.
+
+---
+
+[:arrow_right: Workload Microsegmentation](/mod/module-3-namespace-isolation.md)   <br>
+
+[:arrow_left: Connect the AKS cluster to Calico Cloud](/mod/module-1-connect-calicocloud.md) <br>
+[:leftwards_arrow_with_hook: Back to Main](/README.md)  

@@ -198,65 +198,19 @@ spec:
 EOF
 ```
 
-```yaml
-kubectl apply -f - <<EOF
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: tenant0-egw
----
-apiVersion: projectcalico.org/v3
-kind: IPPool
-metadata:
-  name: tenant0-pool
-spec:
-  cidr: 10.99.0.0/29
-  blockSize: 31
-  nodeSelector: "!all()"
-  vxlanMode: Never
----
-apiVersion: operator.tigera.io/v1
-kind: EgressGateway
-metadata:
-  name: tenant0-egw
-  namespace: tenant0-egw
-spec:
-  logSeverity: "Info"
-  replicas: 2
-  ipPools:
-  - name: tenant0-pool
-  template:
-    metadata:
-      labels:
-        tenant: tenant0-egw
-    spec:
-      terminationGracePeriodSeconds: 0
-      nodeSelector:
-        kubernetes.io/os: linux
-      topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: topology.kubernetes.io/zone
-        whenUnsatisfiable: DoNotSchedule
-        labelSelector:
-          matchLabels:
-            tenant: tenant0-egw
-EOF
-```
-
 ### Validate the Deployment and Review Results
 
 Validate that the Azure Route Server peers are learning routes from the Azure Kubernetes Services cluster.
 
 ```bash
-az network routeserver peering list-learned-routes \\
-  --resource-group demo-hub-network --routeserver hub-rs \\
+az network routeserver peering list-learned-routes \
+  --resource-group demo-hub-network --routeserver hub-rs \
   --name spoke-rs-bgpconnection-peer-1
   ```
 
 ```bash
-az network routeserver peering list-learned-routes \\
-  --resource-group demo-hub-network --routeserver hub-rs \\
+az network routeserver peering list-learned-routes \
+  --resource-group demo-hub-network --routeserver hub-rs \
   --name spoke-rs-bgpconnection-peer-2
   ```
 
@@ -264,7 +218,9 @@ Each node in the cluster should have a /26 block from the default pod IP pool an
 
 Turn off BGP advertisement for the default Calico IPPool and validate the default pod IP routes are no longer being learned by the Azure Route Server peers.
 
+```bash
 kubectl patch ippool default-ipv4-ippool --type='merge' -p '{"spec":{"disableBGPExport": true}}'
+```
 
 In a short while, you should see only the route announcements for the Egress Gateway.
 
@@ -327,7 +283,8 @@ kubectl exec -it -n default netshoot -- curl -v http://www.tigera.io
 
 The request should be denied by the Azure Firewall. You should see a message similar to the following.
 
-```\*   Trying 178.128.166.225:80...
+```
+\*   Trying 178.128.166.225:80...
 \* Connected to www.tigera.io (178.128.166.225) port 80 (#0)
 > GET / HTTP/1.1
 > Host: www.tigera.io
@@ -340,19 +297,20 @@ The request should be denied by the Azure Firewall. You should see a message sim
 < Content-Type: text/plain; charset=utf-8
 <
 \* Connection #0 to host www.tigera.io left intact
-Action: Deny. Reason: No rule matched. Proceeding with default action.```
+Action: Deny. Reason: No rule matched. Proceeding with default action.
+```
 
 Let’s go ahead and activate the Calico Egress Gateways for the cluster. We’ll also specify that pods in the default namespace should use the tenant0-egw Egress Gateway.
 
 ``` bash
-kubectl patch felixconfiguration default \\
+kubectl patch felixconfiguration default \
   --type='merge' -p '{"spec":{"egressIPSupport":"EnabledPerNamespaceOrPerPod"}}'
 ```
 
 Set up the default namespace to utilize the Egress Gateway located in the tenant0-egw namespace.
 
 ``` bash
-kubectl annotate ns default \\
+kubectl annotate ns default \
   egress.projectcalico.org/namespaceSelector="projectcalico.org/name == 'tenant0-egw'"
 ```
 
@@ -366,3 +324,6 @@ You should now be able to get requests through the Azure Firewall. To verify, go
 
 ![](https://www.tigera.io/app/uploads/2023/09/Enabling-Workload-Level-Security-for-AKS-with-Azure-Firewall-and-Calico-Egress-Gateway-4.gif)
 
+---
+[:arrow_left: Web Application Firewall](/mod/module-5-waf.md)    <br>
+[:leftwards_arrow_with_hook: Back to Main](/README.md)  

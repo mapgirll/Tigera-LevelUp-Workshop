@@ -153,4 +153,9 @@ We have the `quarantine` policy created in the `security` tier. This policy has 
 
 3. Repeat the tests from step 1. Now, as you can see, the cannot establish communication with any of the destinations.
 
+---
 
+[:arrow_right: Workload Microsegmentation](/mod/module-3-namespace-isolation.md)       <br>
+
+[:arrow_left: Web Application Firewall](/mod/module-5-waf.md)  <br>
+[:leftwards_arrow_with_hook: Back to Main](/README.md)  

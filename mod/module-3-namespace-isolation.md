@@ -337,3 +337,9 @@ Review the created DNS policy and NetworkSet in Calico Cloud
 
 Now our security policies are complete and we are one step further along in our compliance journey.
 
+---
+
+[:arrow_right: Container Security and Calico Security Events](/mod/module-4-security-events.md)     <br>
+
+[:arrow_left: Deploy an Application](/mod/module-2-deploy-application.md) <br>
+[:leftwards_arrow_with_hook: Back to Main](/README.md)  

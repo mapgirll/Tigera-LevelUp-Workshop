@@ -109,4 +109,8 @@ You can switch between clusters by following the steps below:
 The "**Cluster**" dropdown button will always be visible across the Calico Cloud UI, no matter which section you are viewing. You can change the cluster you want to interact with at any moment.
 When you change the cluster, the Calico Cloud context will change immediately to reflect the information regarding the currently selected cluster.
 
+---
 
+[:arrow_right: Deploy an Application](/mod/module-2-deploy-application.md)   <br>
+
+[:leftwards_arrow_with_hook: Back to Main](/README.md)  

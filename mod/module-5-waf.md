@@ -120,3 +120,9 @@ You should get a response like this:
    * Connection #0 to host vote.vote left intact
    ```
 
+---
+
+[:arrow_right: Container Security and Calico Security Events](/mod/module-4-security-events.md)         <br>
+
+[:arrow_left: Egress Gateway and Azure Firewall](/mod/module-6-egress-gateway-azure-firewall.md)   <br>
+[:leftwards_arrow_with_hook: Back to Main](/README.md)  
