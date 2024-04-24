@@ -11,6 +11,8 @@ Issues with being unable to navigate menus in the UI are often due to browsers b
 
    ![accept_invitation](https://user-images.githubusercontent.com/104035488/215204989-66b666d9-5e93-45b5-a0c5-2236b135af31.png)
 
+   If you're doing this outside of a workshop you can sign up for a Calico Cloud trial.
+
 2. Click on the link ACCEPT INVITATION and create a password to access the Calico Cloud.
 
    <img width="300" alt="create a password" src="https://user-images.githubusercontent.com/104035488/215205017-0a41f506-5c91-4830-9249-677c6a06fb3b.png">

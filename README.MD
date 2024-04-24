@@ -2,7 +2,7 @@
 
 ## Welcome
 
-In this Level Up workshop you will work with Microsoft Azure and Calico Cloud to learn how to employ Calico Cloud in order to visualize cluster traffic and pinpoint security vulnerabilities within your Kubernetes AKS cluster.
+In this workshop you will work with Microsoft Azure and Calico Cloud to learn how to employ Calico Cloud in order to visualize cluster traffic and pinpoint security vulnerabilities within your Kubernetes AKS cluster.
 
 In today's highly interconnected and digital landscape, ensuring the security of your AKS Kubernetes clusters is an absolute necessity. This workshop provides you with the essential knowledge and skills to strengthen your cluster's defenses thoroughly, guaranteeing the safeguarding of vital workloads and sensitive information. It enables you to tailor security measures to suit your specific needs and keeps you at the forefront of cybersecurity in a swiftly evolving environment.
 
@@ -13,11 +13,10 @@ The estimated time to complete this workshop is 60-120 minutes.
 ### Learning Objectives
 
 - Learn how to set up workload access controls with microsegmentation
-- Learn how to use global network policies for namespace (or tenant) isolation)
-- Control DNS-based egress access control at the workload level
+- Learn how to use global network policies for namespace (or tenant) isolation
+- Implement DNS-based egress access control with network sets and network policy
 - Simulate potentially malicious behaviour inside a cluster and identify and observe security events in Calico
-- Configure the workload-centric WAF to block simulated attacks
-- Integrate Calico Egress Gateway with Azure Firewall
+- Use the breadth of Calico's observability features to monitor, visualize and troubleshoot issues within the cluster
 
 ## Workshop Environment Preparation
 
